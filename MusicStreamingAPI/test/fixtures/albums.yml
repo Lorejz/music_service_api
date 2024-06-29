@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  year: 1
+  album_art: MyString
+  total_duration: 1
+  cached_songs: MyText
+
+two:
+  name: MyString
+  year: 1
+  album_art: MyString
+  total_duration: 1
+  cached_songs: MyText
