@@ -7,7 +7,7 @@ class Song < ApplicationRecord
   validates :name, :duration, presence: true
   validates :duration, numericality: { only_integer: true }
   validates :streams, numericality: { only_integer: true }
-
+  
   before_validation :set_default_streams
 
   private
