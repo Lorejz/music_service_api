@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  duration: 1
+  genre: MyString
+  streams: 1
+  album: one
+  artist: one
+  category: one
+
+two:
+  name: MyString
+  duration: 1
+  genre: MyString
+  streams: 1
+  album: two
+  artist: two
+  category: two
