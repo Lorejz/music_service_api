@@ -1,6 +1,5 @@
 class Album < ApplicationRecord
-
-    has_many :songs
+    has_and_belongs_to_many :songs
 
     validates :name, presence: true
     validates :year, presence: true
@@ -8,12 +7,11 @@ class Album < ApplicationRecord
     validates :cached_songs, presence: true
 
     def artists
-        # Verificar si el álbum tiene canciones asociadas
-        if self.songs.any?
+      # Verificar si el álbum tiene canciones asociadas
+      if self.songs.any?
         self.songs.map(&:artist).uniq
-        else
+      else
         []
-        end
+      end
     end
-
-end
+  end

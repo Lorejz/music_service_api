@@ -1,5 +1,5 @@
 class AlbumController < ApplicationController
-
+# GET /album
   def index
     @album = Album.includes(:songs).all
     render json: {
@@ -7,6 +7,7 @@ class AlbumController < ApplicationController
     }, status: :ok
   end
 
+# GET /album/1
   def show
     @album = Album.find(params[:id])
     render json: {

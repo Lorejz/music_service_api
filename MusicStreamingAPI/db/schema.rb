@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_29_182628) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_02_200134) do
   create_table "albums", force: :cascade do |t|
     t.string "name", null: false
     t.integer "year", null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_29_182628) do
     t.text "cached_songs", default: "{}", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "albums_songs", force: :cascade do |t|
+    t.integer "album_id", null: false
+    t.integer "song_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_albums_songs_on_album_id"
+    t.index ["song_id"], name: "index_albums_songs_on_song_id"
   end
 
   create_table "artist_balances", force: :cascade do |t|
@@ -54,17 +63,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_29_182628) do
     t.integer "duration"
     t.integer "streams"
     t.integer "album_id", null: false
-    t.integer "artist_id", null: false
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["album_id"], name: "index_songs_on_album_id"
-    t.index ["artist_id"], name: "index_songs_on_artist_id"
     t.index ["category_id"], name: "index_songs_on_category_id"
   end
 
+  add_foreign_key "albums_songs", "albums"
+  add_foreign_key "albums_songs", "songs"
   add_foreign_key "artist_balances", "artists"
   add_foreign_key "songs", "albums"
-  add_foreign_key "songs", "artists"
   add_foreign_key "songs", "categories"
 end
