@@ -1,16 +1,4 @@
 class SongsController < ApplicationController
-  # GET /songs
-  def index
-    @songs = Song.all
-    render json: @songs, include: [:artists, :album], status: :ok
-  end
-
-  # GET /songs/1
-  def show
-    set_song
-    render json: @song, include: [:artists, :album], status: :ok
-  end
-
   # POST /songs
   def create
     @song = Song.new(song_params)
@@ -26,7 +14,9 @@ class SongsController < ApplicationController
     end
 
     if @song.save
-      render json: @song, include: [:artists, :album], status: :created
+      #@song.albums << Album.where(id: song_params[:album_ids]) if song_params[:album_ids].present?
+      #@song.artists << Artist.where(id: song_params[:artist_ids]) if song_params[:artist_ids].present?
+      render json: @song, include: [:artists, :albums], status: :created
     else
       render json: @song.errors, status: :unprocessable_entity
     end
@@ -39,8 +29,8 @@ class SongsController < ApplicationController
       :name,
       :duration,
       :streams,
-      :album_id,
       :category_id,
+      album_ids: [],
       artist_ids: []
     )
   end
@@ -48,5 +38,4 @@ class SongsController < ApplicationController
   def artist_params
     params.require(:artist).permit(:name, :biography) if params[:artist].present?
   end
-
 end
